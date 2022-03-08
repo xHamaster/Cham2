@@ -577,7 +577,7 @@ async def cbcmnds(_, query: CallbackQuery):
 • /menu or /settings
 - For open menu settings
 
-Powered by **Resso Music** !""",
+Powered by **Broken Music** !""",
         reply_markup=InlineKeyboardMarkup(
             [
               [
@@ -589,7 +589,7 @@ Powered by **Resso Music** !""",
 @Client.on_callback_query(filters.regex("cbabout"))
 async def cbabout(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""**About Resso Music Bot 💡**
+        f"""**About Broken Music Bot 💡**
 
 Resso Music Bot is the bot designed by some noobs team for playing a high quality and unbreakable music in your groups voice chat.
 
@@ -710,7 +710,7 @@ async def cberror(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**Mostly Faced Errors 💡**
 
-mostly, there wiil be the main error about to music assistant. If you are facing any type of error in your group then that time first make sure @RessoMusicAssistant is available in your group. If not then add it manually and before that make sure also it is not banned in ur chat.\n\n**Thanks !**""",
+mostly, there wiil be the main error about to music assistant. If you are facing any type of error in your group then that time first make sure @BrokenAssistant1 is available in your group. If not then add it manually and before that make sure also it is not banned in ur chat.\n\n**Thanks !**""",
         reply_markup=InlineKeyboardMarkup(
             [
             [InlineKeyboardButton("Contact Developers", callback_data="cbhelp")],
@@ -737,7 +737,7 @@ async def cbhome(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**Welcome [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})** 👋
 
-This is the resso music bot, a bot for playing high quality and unbreakable music in your groups voice chat.
+This is the broken music bot, a bot for playing high quality and unbreakable music in your groups voice chat.
 
 Just add me to your group and make a admin with needed admin permission to perform a right actions !
 
