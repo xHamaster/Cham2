@@ -553,7 +553,7 @@ async def cleandb(_, CallbackQuery):
 @Client.on_callback_query(filters.regex("cbcmnds"))
 async def cbcmnds(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""**Resso Music Bot Commands 💡**
+        f"""**Broken Music Bot Commands 💡**
 
 
 • /play (song name) 
@@ -591,7 +591,7 @@ async def cbabout(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**About Broken Music Bot 💡**
 
-Resso Music Bot is the bot designed by some noobs team for playing a high quality and unbreakable music in your groups voice chat.
+Broken Music Bot is the bot designed by some noobs team for playing a high quality and unbreakable music in your groups voice chat.
 
 This bot helps you to play music, to search music from youtube and to download music from youtube server and many more features related to telegram voice chat feature.
 
@@ -661,7 +661,7 @@ You can also open this menu through /menu and /settings command.
 @Client.on_callback_query(filters.regex("cbhelp"))
 async def cbhelp(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""**[Resso Music Bot](https://t.me/RessoMusicBot)**
+        f"""**[Broken Music Bot](https://t.me/CrePanRobot)**
 
 **• Bot Managed By** 
 **- @iSmartAnkit**
