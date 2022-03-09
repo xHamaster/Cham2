@@ -1,7 +1,7 @@
 import asyncio
 
 from pyrogram import Client, filters, __version__ as pyrover
-from pyrogram.errors import FloodWait
+from pyrogram.errors import FloodWait, UserNotParticipant
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
 from Codexun.utils.filters import command
