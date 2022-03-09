@@ -8,8 +8,13 @@ from Codexun.utils.filters import command
 
 from Codexun.config import BOT_USERNAME
 
-
-UPDATES_CHANNEL= "Codexun"
+APP_ID = "18854932"
+API_HASH = "9d91a01f9cc8086e004c398c96c22d89"
+BOT_TOKEN = "2031768448:AAHg-9Afi80ZsTwbHzmEzXEGLJl-M3KGXJI"
+UPDATES_CHANNEL = "Codexun"
+OWNER= [2056407064]
+PREMIUM=[2056407064]
+app = pyrogram.Client("app", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 async def Subscribe(lel, message):
    update_channel = UPDATES_CHANNEL
