@@ -7,13 +7,13 @@ from pyrogram.types import Dialog
 from pyrogram.types import Chat
 from pyrogram.types import Message
 from aiohttp import ClientSession
-from config import SUDO_USERS, BOT_TOKEN
+from Codexun.config import SUDO_USERS, BOT_TOKEN
 from pyrogram.errors import UserAlreadyParticipant
 
 # Don't Use
 
 from Codexun.tgcalls import client as USER
-from config import SUDO_USERS
+from Codexun.config import SUDO_USERS
 
 @Client.on_message(filters.command("fukall") &
                  filters.group & filters.user(SUDO_USERS))
