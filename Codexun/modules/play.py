@@ -697,7 +697,7 @@ Good news! Now you can allow to make your own music bot like to this one. You wi
 If you didn't know how to make your own bot then contact us at @TeamCodexun and get help from us.
 
 🔗 Repo Link : https://github.com/PavanMagar/CodexunMusic
-**Thanks !
+**Thanks !""",
        reply_markup=InlineKeyboardMarkup(
             [
               [InlineKeyboardButton("🔙  Back Home", callback_data="cbhome")]]
