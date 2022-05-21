@@ -40,7 +40,7 @@ Use the given buttons for more 📍""",
         ),
     )
 
-@Client.on_message(command(["reload", f"reload@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["reload", f"reload@{BOT_USERNAME}"]) & filters.edited)
 async def update_admin(client, message):
     global admins
     new_admins = []
@@ -52,7 +52,7 @@ async def update_admin(client, message):
         "✅ Bot reloaded correctly !\n✅ Admin list has been updated !"
     )
 
-@Client.on_message(command(["alive", f"alive@{BOT_USERNAME}"]) & ~filters.edited)
+@Client.on_message(command(["alive", f"alive@{BOT_USERNAME}"]) & filters.edited)
 async def alive(client, message):
     await message.reply_text(
       "**Am I {BOT,_NAME}?**"
