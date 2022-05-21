@@ -747,14 +747,6 @@ async def closed(_, query: CallbackQuery):
         )
     await query.message.delete()
 
-@Client.on_callback_query(filters.regex("vlm"))
-async def volume(_, query: CallbackQuery):
-    await query.answer(
-            "Coming soon...",
-            show_alert=True,
-        )
-    
-
 @Client.on_callback_query(filters.regex("cbmenu"))
 async def cbmenu(_, query: CallbackQuery):
     if query.message.sender_chat:
