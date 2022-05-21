@@ -38,6 +38,8 @@ from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForb
 
 
 from Codexun.tgcalls import calls, queues
+from Codexun.tgcalls.youtube import download
+from Codexun.tgcalls import convert as cconvert
 from Codexun.tgcalls.calls import client as ASS_ACC
 from Codexun.database.queue import (
     get_active_chats,
@@ -61,6 +63,7 @@ from Codexun.config import (
     ASSID,
     SUPPORT,
     UPDATE,
+    BOT_NAME,
     BOT_USERNAME,
 )
 from Codexun.utils.filters import command
@@ -173,7 +176,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     # description
     views = f"Views : {views}"
     duration = f"Duration : {duration} minutes"
-    channel = f"Request : Broken Music Bot"
+    channel = f"Request : {BOT_NAME}"
 
     image4.text((670, 410), text=views, fill="white", font = font4, align ="left") 
     image4.text((670, 460), text=duration, fill="white", font = font4, align ="left") 
@@ -383,7 +386,7 @@ menu_keyboard = InlineKeyboardMarkup(
              InlineKeyboardButton(text="Quality", callback_data=f"high"),
         ],[
             InlineKeyboardButton(text="CleanDB", callback_data=f"dbconfirm"),
-             InlineKeyboardButton(text="Language", callback_data=f"vlm"),
+             InlineKeyboardButton(text="About", callback_data=f"grpabout"),
         ],[
              InlineKeyboardButton(text="🗑️ Close Menu", callback_data=f"cls"),
         ],
@@ -553,7 +556,7 @@ async def cleandb(_, CallbackQuery):
 @Client.on_callback_query(filters.regex("cbcmnds"))
 async def cbcmnds(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""**Broken Music Bot Commands 💡**
+        f"""**{BOT_NAME} Bot Commands 💡**
 
 
 • /play (song name) 
@@ -577,7 +580,7 @@ async def cbcmnds(_, query: CallbackQuery):
 • /menu or /settings
 - For open menu settings
 
-Powered by **Broken Music** !""",
+Powered by **{BOT_NAME}** !""",
         reply_markup=InlineKeyboardMarkup(
             [
               [
@@ -589,9 +592,9 @@ Powered by **Broken Music** !""",
 @Client.on_callback_query(filters.regex("cbabout"))
 async def cbabout(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""**About Broken Music Bot 💡**
+        f"""**About {BOT_NAME} Bot 💡**
 
-Broken Music Bot is the bot designed by some noobs team for playing a high quality and unbreakable music in your groups voice chat.
+[{BOT_NAME}](https://t.me/{BOT_USERNAME}) Music Bot is the bot designed by @{UPDATE} for playing a high quality and unbreakable music in your groups voice chat.
 
 This bot helps you to play music, to search music from youtube and to download music from youtube server and many more features related to telegram voice chat feature.
 
@@ -608,28 +611,14 @@ async def grpabout(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**About Section 💡**
 
-Here is the about section for contact bot owner and for making your own bot like this !
+Here is the about section for contact bot owner and for Get help !
 
-**Team @Codexun**""",
+**From @{UPDATE}**""",
         reply_markup=InlineKeyboardMarkup(
             [
-            [InlineKeyboardButton("Owned Admin 👨🏻‍💻", user_id=2090451552)],
-            [InlineKeyboardButton("Make Your Own 🤖", callback_data="cbmakeur")],
-            [InlineKeyboardButton("🗑️ Close Menu", callback_data="cls")]]
-        ),
-    )
-@Client.on_callback_query(filters.regex("cbmakeur"))
-async def cbmakeur(_, query: CallbackQuery):
-    await query.edit_message_text(
-        f"""**Make Your Own Bot 🤖**
-
-About to making your own bot like this, Tutorial Soon available at @Codexun and source code of bot also.
-
-**@TeamCodexun**""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-            
-            [InlineKeyboardButton("⬅️ Back", callback_data="grpabout")],
+            [InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}),
+             InlineKeyboardButton("Updates 🤖 ", url=f"https://t.me/{UPDATE})],
+            [InlineKeyboardButton("Owned Admin 👨🏻‍💻", user_id=OWNER_ID)],
             [InlineKeyboardButton("🗑️ Close Menu", callback_data="cls")]]
         ),
     )
@@ -658,28 +647,7 @@ You can also open this menu through /menu and /settings command.
             [InlineKeyboardButton("🔙  Back Home", callback_data="cbcmnds")]]
         ),
     )
-@Client.on_callback_query(filters.regex("cbhelp"))
-async def cbhelp(_, query: CallbackQuery):
-    await query.edit_message_text(
-        f"""**[Broken Music Bot](https://t.me/CrePanRobot)**
 
-**• Bot Managed By** 
-**- @iSmartAnkit**
-**- @PavanMagar**
-**- @Noob_Aayu**
-
-**• Powered by**
-**- @Codexun**
-**- @TeamCodexun**
-
-**Note : Contact developers only that time if you have really need a help or facing any type of issues. Don't try to waste our and your time by asking useless queries !**""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-            [InlineKeyboardButton("Support", url=f"https://t.me/teamCodexun"),
-             InlineKeyboardButton("Updates", url=f"https://t.me/Codexun")],
-            [InlineKeyboardButton("🔙  Back Home", callback_data="cbhome")]]
-        ),
-    )
 
 @Client.on_callback_query(filters.regex("cbguide"))
 async def cbguide(_, query: CallbackQuery):
@@ -710,10 +678,10 @@ async def cberror(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**Mostly Faced Errors 💡**
 
-mostly, there wiil be the main error about to music assistant. If you are facing any type of error in your group then that time first make sure @BrokenAssistant1 is available in your group. If not then add it manually and before that make sure also it is not banned in ur chat.\n\n**Thanks !**""",
+mostly, there wiil be the main error about to music assistant. If you are facing any type of error in your group then that time first make sure @{ASSUSERNAME} is available in your group. If not then add it manually and before that make sure also it is not banned in ur chat.\n\n**Thanks !**""",
         reply_markup=InlineKeyboardMarkup(
             [
-            [InlineKeyboardButton("Contact Developers", callback_data="cbhelp")],
+            
               [InlineKeyboardButton("🔙  Back Home", callback_data="cbguide")]]
         ),
     )
@@ -724,10 +692,14 @@ async def cbtuto(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**Make Your Own Bot Like this💡**
 
-**Tutorial soon at : @Codexun**\n\nThe Tutorial video about to making your own bot like this will be soon available at @Codexun. Also source code and all information about making bot published soon.Stay connected with us at our update channel.\n\n**Thanks !**""",
-        reply_markup=InlineKeyboardMarkup(
+Good news! Now you can allow to make your own music bot like to this one. You will be get repo link below just click on it and follow steps!
+
+If you didn't know how to make your own bot then contact us at @TeamCodexun and get help from us.
+
+🔗 Repo Link : https://github.com/PavanMagar/CodexunMusic
+**Thanks !
+       reply_markup=InlineKeyboardMarkup(
             [
-            [InlineKeyboardButton("Contact Developers", callback_data="cbhelp")],
               [InlineKeyboardButton("🔙  Back Home", callback_data="cbhome")]]
         ),
     )
@@ -737,7 +709,7 @@ async def cbhome(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**Welcome [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})** 👋
 
-This is the broken music bot, a bot for playing high quality and unbreakable music in your groups voice chat.
+This is the [{BOT_NAME}](https://t.me/{BOT_USERNAME}) bot, a bot for playing high quality and unbreakable music in your groups voice chat.
 
 Just add me to your group and make a admin with needed admin permission to perform a right actions !
 
@@ -793,7 +765,7 @@ async def cbmenu(_, query: CallbackQuery):
     chat_id = query.message.chat.id
     if is_music_playing(chat_id):
           await query.edit_message_text(
-              f"**⚙️ Music Bot Settings**\n\n📮 Group : {query.message.chat.title}.\n📖 Grp ID : {query.message.chat.id}\n\n**Manage Your Groups Music System By Pressing Buttons Given Below 💡**",
+              f"**⚙️ {BOT_NAME} Bot Settings**\n\n📮 Group : {query.message.chat.title}.\n📖 Grp ID : {query.message.chat.id}\n\n**Manage Your Groups Music System By Pressing Buttons Given Below 💡**",
 
               reply_markup=menu_keyboard
          )
@@ -1023,7 +995,7 @@ async def play(_, message: Message):
       
 
         return
-    lel = await message.reply("**Processing started..**")
+    lel = await message.reply("**Connecting server...🔄**")
 
     chid = message.chat.id
 
@@ -1066,12 +1038,12 @@ async def play(_, message: Message):
             try:
                 await ASS_ACC.join_chat(f"{message.chat.username}")
                 await message.reply(
-                    f"**Resso Music Assistant joined !**",
+                    f"**@{ASSUSERNAME} joined !**",
                 )
                 await remove_active_chat(chat_id)
             except Exception as e:
                 await message.reply_text(
-                    f"**Resso Assistant failed to join** Add @RessoMusicAssistant manually in your group.\n\n**Reason**:{e}"
+                    f"**@{ASSUSERNAME} failed to join** Add @{ASSUSERNAME} manually in your group.\n\n**Reason**:{e}"
                 )
                 return
         else:
@@ -1082,14 +1054,14 @@ async def play(_, message: Message):
                     link_bokep = f"https://t.me/joinchat/{kontol}"
                 await ASS_ACC.join_chat(link_bokep)
                 await message.reply(
-                    f"**Resso Assistant joined successfully**",
+                    f"**@{ASSUSERNAME} joined successfully**",
                 )
                 await remove_active_chat(message.chat.id)
             except UserAlreadyParticipant:
                 pass
             except Exception as e:
                 return await message.reply_text(
-                    f"**Assistant failed to join** Add @RessoMusicAssistant manually in your group.\n\n**Reason**:{e}"
+                    f"**@{ASSUSERNAME} failed to join** Add @{ASSUSERNAME} manually in your group.\n\n**Reason**:{e}"
                 )
 
     await message.delete()
@@ -1129,7 +1101,7 @@ async def play(_, message: Message):
 
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await oda.tgcalls.convert(
+        file_path = await cconvert(
             (await message.reply_to_message.download(file_name))
             if not path.isfile(path.join("downloads", file_name))
             else file_name
@@ -1249,12 +1221,12 @@ async def play(_, message: Message):
                 print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
 
         loop = asyncio.get_event_loop()
-        x = await loop.run_in_executor(None, youtube.download, url, my_hook)
-        file_path = await Codexun.tgcalls.convert(x)
+        x = await loop.run_in_executor(None, download, url, my_hook)
+        file_path = await cconvert(x)
     else:
         if len(message.command) < 2:
             return await lel.edit(
-                "**Give me song name !**"
+                "**Don't be a crazy, Give me song name to play!\n\nExampl \n/play hamanwa mere**"
             )
         await lel.edit("**Connected successfully !**")
         query = message.text.split(None, 1)[1]
@@ -1372,15 +1344,15 @@ async def play(_, message: Message):
                 print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
 
         loop = asyncio.get_event_loop()
-        x = await loop.run_in_executor(None, youtube.download, url, my_hook)
-        file_path = await Codexun.tgcalls.convert(x)
+        x = await loop.run_in_executor(None, download, url, my_hook)
+        file_path = await cconvert(x)
 
     if await is_active_chat(message.chat.id):
         position = await queues.put(message.chat.id, file=file_path)
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption="**[Get Additional Information 💡]({})**\n\n**⑆ User :** **{}**\n**⑆ Group : [{}..](https://t.me/CreatorPavanChat)**".format(
+            caption="**[Get Additional Information 💡]({})**\n\n**⑆ User :** **{}**\n**⑆ Group : [{}..](https://t.me/codexun)**".format(
                 url, message.from_user.mention(), message.chat.title
             ),
         )
@@ -1397,7 +1369,7 @@ async def play(_, message: Message):
             )
         except Exception:
             return await lel.edit(
-                "Error Joining Voice Chat. Make sure Voice Chat is Enabled."
+                "Error Joining Voice Chat. Make sure Voice Chat is Enabled.\n\n If YES, then make sure @{ASSUSERNAME} is not banned in your group!\n\nSupport - {SUPPORT}"
             )
 
 
@@ -1406,7 +1378,7 @@ async def play(_, message: Message):
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption="**[Get Additional Information 💡]({})**\n\n**⑆ User :** **{}**\n**⑆ Group : [{}..](https://t.me/CreatorPavanChat)**".format(
+            caption="**[Get Additional Information 💡]({})**\n\n**⑆ User :** **{}**\n**⑆ Group : [{}..](https://t.me/codexun)**".format(
                 url, message.from_user.mention(), message.chat.title
             ),
         )
