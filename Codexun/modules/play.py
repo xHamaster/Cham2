@@ -594,7 +594,7 @@ async def cbabout(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**About {BOT_NAME} Bot 💡**
 
-[{BOT_NAME}](https://t.me/{BOT_USERNAME}) Music Bot is the bot designed by @{UPDATE} for playing a high quality and unbreakable music in your groups voice chat.
+**[{BOT_NAME}](https://t.me/{BOT_USERNAME})** Music Bot is the bot designed by **@{UPDATE}** for playing a high quality and unbreakable music in your groups voice chat.
 
 This bot helps you to play music, to search music from youtube and to download music from youtube server and many more features related to telegram voice chat feature.
 
@@ -618,7 +618,6 @@ Here is the about section for contact bot owner and for Get help !
             [
             [InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}")],
             [InlineKeyboardButton("Updates 🤖", url=f"https://t.me/{UPDATE}")],
-            [InlineKeyboardButton("Owned Admin 👨🏻‍💻", user_id=OWNER_ID)],
             [InlineKeyboardButton("🗑️ Close Menu", callback_data="cls")]]
         ),
     )
@@ -696,7 +695,8 @@ Good news! Now you can allow to make your own music bot like to this one. You wi
 
 If you didn't know how to make your own bot then contact us at @TeamCodexun and get help from us.
 
-🔗 Repo Link : https://github.com/PavanMagar/CodexunMusic
+🔗 Repo Link : Contact @Gone_Foreverr
+
 **Thanks !""",
        reply_markup=InlineKeyboardMarkup(
             [
@@ -709,7 +709,7 @@ async def cbhome(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**Welcome [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})** 👋
 
-This is the [{BOT_NAME}](https://t.me/{BOT_USERNAME}) bot, a bot for playing high quality and unbreakable music in your groups voice chat.
+This is the **[{BOT_NAME}](https://t.me/{BOT_USERNAME})** bot, a bot for playing high quality and unbreakable music in your groups voice chat.
 
 Just add me to your group and make a admin with needed admin permission to perform a right actions !
 
