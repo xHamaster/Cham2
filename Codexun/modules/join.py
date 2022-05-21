@@ -11,7 +11,7 @@ from Codexun.tgcalls import client as USER
 
 
 @app.on_message(
-    command(["userbotjoin", "odajoin", "oj"]) & ~filters.private & ~filters.bot
+    command(["userbotjoin"]) & ~filters.private & ~filters.bot
 )
 @errors
 async def addchannel(client, message):
@@ -50,12 +50,12 @@ async def addchannel(client, message):
         print(e)
         await message.reply_text(
             f"**Assistant ({user.first_name}) can't join your group due to many join requests for userbot!**\n‼️ Make sure the user is not banned in the group."
-            f"\n\n» `Manually add the @BrokenAssistant1 to your group`",
+            f"\n\n» `Manually add the @{ASSUSERNAME} to your group`",
         )
         return
 
 
-@USER.on_message(filters.group & command(["userbotleave", "odaleave", "odaleft"]))
+@USER.on_message(filters.group & command(["userbotleave"]))
 async def rem(USER, message):
     if message.sender_chat:
         return await message.reply_text(
@@ -68,7 +68,7 @@ async def rem(USER, message):
     try:
         await USER.send_message(
             message.chat.id,
-            "**Assistant successfully left chat ✓**",
+            "**Assistant successfully left ✓**",
         )
         await USER.leave_chat(message.chat.id)
     except:
