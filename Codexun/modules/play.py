@@ -606,8 +606,8 @@ This bot helps you to play music, to search music from youtube and to download m
         ),
     )
 
-@Client.on_callback_query(filters.regex("grpabout"))
-async def grpabout(_, query: CallbackQuery):
+@Client.on_callback_query(filters.regex("cbgroupab"))
+async def cbgroupab(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""**About Section 💡**
 
@@ -695,7 +695,7 @@ Good news! Now you can allow to make your own music bot like to this one. You wi
 
 If you didn't know how to make your own bot then contact us at @TeamCodexun and get help from us.
 
-🔗 Repo Link : Contact @Gone_Foreverr
+🔗 Repo Link : Contact @PavanMagar
 
 **Thanks !""",
        reply_markup=InlineKeyboardMarkup(
@@ -1091,7 +1091,7 @@ async def play(_, message: Message):
         
        [
             InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="grpabout"),
+            InlineKeyboardButton("About 👨🏻‍💻", callback_data="cbgroupab"),
         ],[
             InlineKeyboardButton("Close 🗑️", callback_data="cls"),
         ],
@@ -1132,7 +1132,7 @@ async def play(_, message: Message):
         
        [
             InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="grpabout"),
+            InlineKeyboardButton("About 👨🏻‍💻", callback_data="cbgroupab"),
         ],[
             InlineKeyboardButton("Close 🗑️", callback_data="cls"),
         ],
@@ -1228,10 +1228,10 @@ async def play(_, message: Message):
             return await lel.edit(
                 "**Don't be a crazy, Give me song name to play!\n\nExampl \n/play hamanwa mere**"
             )
-        await lel.edit("**Connected successfully !**")
+        await lel.edit("**Connected successfully...✅**")
         query = message.text.split(None, 1)[1]
         # print(query)
-        await lel.edit("**Downloding your song..**")
+        await lel.edit("**Downloding your song...📥**")
         try:
             results = YoutubeSearch(query, max_results=5).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -1264,7 +1264,7 @@ async def play(_, message: Message):
         
        [
             InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="grpabout"),
+            InlineKeyboardButton("About 👨🏻‍💻", callback_data="cbgroupab"),
         ],[
             InlineKeyboardButton("Close 🗑️", callback_data="cls"),
         ],
