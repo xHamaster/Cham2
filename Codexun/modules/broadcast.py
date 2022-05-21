@@ -5,6 +5,7 @@ from pyrogram.errors import FloodWait
 
 from Codexun import app
 from Codexun.config import SUDO_USERS
+from Codexun.config import USERS
 from Codexun.utils.filters import command
 from Codexun.tgcalls import client as USER
 from Codexun.database.chats import add_served_chat, blacklisted_chats, get_served_chats
@@ -30,7 +31,7 @@ async def chat_watcher_func(_, message):
     await add_served_chat(chat_id)
 
 
-@app.on_message(command("gcast") & filters.user(SUDO_USERS))
+@app.on_message(command("gcast") & filters.user(SUDO_USERS, USERS))
 async def broadcast_message(_, message):
     if not message.reply_to_message:
         pass
@@ -56,7 +57,7 @@ async def broadcast_message(_, message):
             except Exception:
                 pass
         await message.reply_text(
-            f"**Broadcasted Message In {sent}  Chats with {pin} Pins.**"
+            f"**Broadcasted Message In {sent}  Chats with {pin} Pins.**\n\n**Make sure you joined @Codexun for regular updates from team, thanks!**"
         )
         return
     if len(message.command) < 2:
@@ -82,14 +83,14 @@ async def broadcast_message(_, message):
         except Exception:
             pass
     await message.reply_text(
-        f"✈️ **Broadcasted message in {sent} chats and {pin} pins.**"
+        f"✈️ **Broadcasted message in {sent} chats and {pin} pins.**\n\n**Make sure you joined @Codexun for regular updates from team, thanks!**"
     )
 
 
 # Broadcast without pinned
 
 
-@app.on_message(command("broadcast") & filters.user(SUDO_USERS) & ~filters.edited)
+@app.on_message(command("broadcast") & filters.user(SUDO_USERS, USERS) & ~filters.edited)
 async def broadcast_message(_, message):
     if len(message.command) < 2:
         return await message.reply_text("**Usage**:\n/broadcast [message]")
