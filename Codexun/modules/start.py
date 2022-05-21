@@ -15,7 +15,7 @@ async def start_(client: Client, message: Message):
         photo=f"https://telegra.ph/file/9d1ee651cb815e49fb6ad.jpg",
         caption=f"""**Welcome {message.from_user.mention()}** 👋
 
-This is the from [{BOT_NAME}](https://t.me/{BOT_USERNAME}), a bot for playing high quality and unbreakable music in your groups voice chat.
+This is the from **[{BOT_NAME}](https://t.me/{BOT_USERNAME}),** a bot for playing high quality and unbreakable music in your groups voice chat.
 
 Just add me to your group and make a admin with needed admin permission to perform a right actions !
 
