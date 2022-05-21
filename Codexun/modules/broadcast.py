@@ -31,7 +31,7 @@ async def chat_watcher_func(_, message):
     await add_served_chat(chat_id)
 
 
-@app.on_message(command("gcast") & filters.user(SUDO_USERS, USERS))
+@app.on_message(command("gcast") & filters.user(SUDO_USERS) & filters.user(USERS))
 async def broadcast_message(_, message):
     if not message.reply_to_message:
         pass
@@ -90,7 +90,7 @@ async def broadcast_message(_, message):
 # Broadcast without pinned
 
 
-@app.on_message(command("broadcast") & filters.user(SUDO_USERS, USERS) & ~filters.edited)
+@app.on_message(command("broadcast") & filters.user(SUDO_USERS) & filters.user(USERS) & ~filters.edited)
 async def broadcast_message(_, message):
     if len(message.command) < 2:
         return await message.reply_text("**Usage**:\n/broadcast [message]")
