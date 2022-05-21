@@ -616,8 +616,8 @@ Here is the about section for contact bot owner and for Get help !
 **From @{UPDATE}**""",
         reply_markup=InlineKeyboardMarkup(
             [
-            [InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}),
-             InlineKeyboardButton("Updates 🤖 ", url=f"https://t.me/{UPDATE})],
+            [InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}")],
+            [InlineKeyboardButton("Updates 🤖", url=f"https://t.me/{UPDATE}")],
             [InlineKeyboardButton("Owned Admin 👨🏻‍💻", user_id=OWNER_ID)],
             [InlineKeyboardButton("🗑️ Close Menu", callback_data="cls")]]
         ),
