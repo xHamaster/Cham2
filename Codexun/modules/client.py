@@ -1,3 +1,79 @@
+import aiofiles
+import ffmpeg
+import asyncio
+import os
+import shutil
+import psutil
+import subprocess
+import requests
+import aiohttp
+import yt_dlp
+import aiohttp
+import random
+
+from os import path
+from typing import Union
+from asyncio import QueueEmpty
+from PIL import Image, ImageFont, ImageDraw, ImageFilter
+from PIL import ImageGrab
+from typing import Callable
+
+from pytgcalls import StreamType
+from pytgcalls.types.input_stream import InputStream
+from pytgcalls.types.input_stream import InputAudioStream
+
+from youtube_search import YoutubeSearch
+
+from pyrogram import Client, filters
+from pyrogram.types import (
+    Message,
+    Voice,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    CallbackQuery,
+)
+from pyrogram.errors import UserAlreadyParticipant, UserNotParticipant
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForbidden
+
+
+from Codexun.tgcalls import calls, queues
+from Codexun.tgcalls.youtube import download
+from Codexun.tgcalls import convert as cconvert
+from Codexun.tgcalls.calls import client as ASS_ACC
+from Codexun.database.queue import (
+    get_active_chats,
+    is_active_chat,
+    add_active_chat,
+    remove_active_chat,
+    music_on,
+    is_music_playing,
+    music_off,
+)
+from Codexun import app
+import Codexun.tgcalls
+from Codexun.tgcalls import youtube
+from Codexun.config import (
+    DURATION_LIMIT,
+    que,
+    SUDO_USERS,
+    BOT_ID,
+    ASSNAME,
+    ASSUSERNAME,
+    ASSID,
+    SUPPORT,
+    UPDATE,
+    BOT_NAME,
+    BOT_USERNAME,
+)
+from Codexun.utils.filters import command
+from Codexun.utils.decorators import errors, sudo_users_only
+from Codexun.utils.administrator import adminsOnly
+from Codexun.utils.errors import DurationLimitError
+from Codexun.utils.gets import get_url, get_file_name
+from Codexun.modules.admins import member_permissions
+
+
 def others_markup(videoid, user_id):
     buttons = [
         [
@@ -204,10 +280,10 @@ menu_keyboard = InlineKeyboardMarkup(
 
 
 
-@Client.on_message(command(["menu", "settings"]) & ~filters.edited)
+@Client.on_message(command(["menu", "settings"]) & filters.group & ~filters.edited)
 async def menu(client: Client, message: Message):
     await message.reply_photo(
-        photo=f"https://telegra.ph/file/e594d98181c2f54b872fd.jpg",
+        photo=f"{START_IMG}",
         caption=f"""**Hey {message.from_user.mention()}** 👋
 This the menu section where you can manage music playing on your groups voice chat. Use the given buttons for manage!""",
     reply_markup=menu_keyboard
@@ -388,12 +464,44 @@ async def cbcmnds(_, query: CallbackQuery):
 • /menu or /settings
 - For open menu settings
 
-Powered by **{BOT_NAME}** !""",
+Powered by **{UPDATE}** !""",
         reply_markup=InlineKeyboardMarkup(
             [
               [
-               InlineKeyboardButton("Menu", callback_data="cbstgs")],
+                    InlineKeyboardButton(
+                        "Menu", callback_data="cbstgs"),
+                    InlineKeyboardButton(
+                        "Sudo/Owner", callback_data="cbowncmnds")
+                ],
               [InlineKeyboardButton("🔙  Back Home", callback_data="cbhome")]]
+        ),
+    )
+@Client.on_callback_query(filters.regex("cbowncmnds"))
+async def cbowncmnds(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""**Owner & Sudo Commands 💡**
+
+
+• /broadcast (massage)
+- Broadcast msg through bot
+
+• /gcast (massage) 
+- Broadcast msg with pin
+
+• /restart 
+- Restart bot from server
+
+• /exec
+- Execute any code
+
+• /leaveall 
+- For leaving assistant from all chats
+
+Powered by **{UPDATE}** !""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+              
+              [InlineKeyboardButton("🔙  Back Home", callback_data="cbcmnds")]]
         ),
     )
 
@@ -406,29 +514,18 @@ async def cbabout(_, query: CallbackQuery):
 
 This bot helps you to play music, to search music from youtube and to download music from youtube server and many more features related to telegram voice chat feature.
 
-**Thanks !**""",
+**Assistant :- @{ASSUSERNAME}**""",
         reply_markup=InlineKeyboardMarkup(
             [
+              [
+                    InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}"),
+                    InlineKeyboardButton("Updates 🤖", url=f"https://t.me/{UPDATE}")
+                ],
             [InlineKeyboardButton("Make Your Own Bot", callback_data="cbtuto")],
             [InlineKeyboardButton("🔙  Back Home", callback_data="cbhome")]]
         ),
     )
 
-@Client.on_callback_query(filters.regex("cbgroupab"))
-async def cbgroupab(_, query: CallbackQuery):
-    await query.edit_message_text(
-        f"""**About Section 💡**
-
-Here is the about section for contact bot owner and for Get help !
-
-**From @{UPDATE}**""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-            [InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}")],
-            [InlineKeyboardButton("Updates 🤖", url=f"https://t.me/{UPDATE}")],
-            [InlineKeyboardButton("🗑️ Close Menu", callback_data="cls")]]
-        ),
-    )
 
 @Client.on_callback_query(filters.regex("cbstgs"))
 async def cbstgs(_, query: CallbackQuery):
@@ -770,3 +867,4 @@ async def dbconfirm(_, query: CallbackQuery):
          )
     else:
         await query.answer("nothing is currently streaming", show_alert=True)
+
