@@ -48,7 +48,7 @@
         "SUPPORT": {
             "description": "fill with your bot support group",
             "required": false,
-            "value": "Team Codexun"
+            "value": "TeamCodexun"
         },
         "UPDATE": {
             "description": "fill with your bot update channel",
