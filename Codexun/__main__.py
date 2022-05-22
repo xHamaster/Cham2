@@ -8,6 +8,7 @@ from Codexun.database.queue import get_active_chats, remove_active_chat
 from Codexun.tgcalls.calls import run
 from Codexun.config import API_ID, API_HASH, BOT_TOKEN, BG_IMG
 
+BG_IMG = https://telegra.ph/file/f2a2d31f60a9e0f3dbe94.png
 
 response = requests.get(BG_IMG)
 with open("./etc/foreground.png", "wb") as file:
