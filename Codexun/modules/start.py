@@ -39,21 +39,11 @@ Use the given buttons for more 📍""",
            ]
         ),
     )
+@Client.on_message(command("alive") & ~filters.edited)
+async def start_(client: Client, message: Message):
+    await message.reply_photo(
+        photo=f"https://telegra.ph/file/9d1ee651cb815e49fb6ad.jpg",
+        caption=f"""**Welcome {message.from_user.mention()}** 👋
 
-@Client.on_message(command(["reload", f"reload@{BOT_USERNAME}"]) & filters.edited)
-async def update_admin(client, message):
-    global admins
-    new_admins = []
-    new_ads = await client.get_chat_members(message.chat.id, filter="administrators")
-    for u in new_ads:
-        new_admins.append(u.user.id)
-    admins[message.chat.id] = new_admins
-    await message.reply_text(
-        "✅ Bot reloaded correctly !\n✅ Admin list has been updated !"
+Am I [{BOT_NAME}](https://t.me/{BOT_USERNAME})**""",
     )
-
-@Client.on_message(command(["alive", f"alive@{BOT_USERNAME}"]) & filters.edited)
-async def alive(client, message):
-    await message.reply_text(
-      "**Am I {BOT,_NAME}?**"
-   )
