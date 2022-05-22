@@ -61,6 +61,7 @@ from Codexun.config import (
     ASSNAME,
     ASSUSERNAME,
     ASSID,
+    START_IMG,
     SUPPORT,
     UPDATE,
     BOT_NAME,
