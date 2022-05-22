@@ -7,7 +7,7 @@
     "stack": "container",
     "env": {
         "SESSION_NAME": {
-            "description": "fill with the pyrogram session string from account",
+            "description": "fill with the pyrogram session string of your assistant account",
             "required": true
         },
         "OWNER_ID": {
@@ -16,22 +16,22 @@
             "value": "2056407064"
         },
         "ASSID": {
-            "description": "fill with telegram id of account",
+            "description": "fill with telegram id of your assistant account",
             "required": true,
             "value": ""
         },
         "ASSNAME": {
-            "description": "fill with telegram name of account",
+            "description": "fill with telegram name of your assistant account",
             "required": true,
             "value": ""
         },
         "ASSUSERNAME": {
-            "description": "fill with telegram username of account without @",
+            "description": "fill with telegram username of your assistant account without @",
             "required": true,
             "value": ""
         },
         "BOT_ID": {
-            "description": "fill with telegram id of bot",
+            "description": "fill with telegram id of your bot",
             "required": true,
             "value": ""
         },
@@ -46,12 +46,12 @@
             "value": ""
         },
         "SUPPORT": {
-            "description": "fill with your bot support group",
+            "description": "fill with your bot support group, please fill valid username",
             "required": false,
             "value": "TeamCodexun"
         },
         "UPDATE": {
-            "description": "fill with your bot update channel",
+            "description": "fill with your bot update channel, please fill valid username",
             "required": false,
             "value": "Codexun"
         },
@@ -61,12 +61,12 @@
             "value": ""
         },
         "HEROKU_APP_NAME": {
-            "description": "Add the Heroku app name here. It helps with restart bot.",
+            "description": "Add the Heroku app name here. As filled in the top. It helps with restart bot.",
             "required": true,
             "value": ""
         },
         "START_IMG": {
-            "description": "Set your own music bot image which comes after /start",
+            "description": "Set your own music bot image which comes after /start command in bots pm",
             "required": true,
             "value": ""
         },
@@ -81,14 +81,14 @@
             "value": ""
         },
         "SUDO_USERS": {
-            "description": "fill with the user id who can access all function in your bot (separate with space).",
+            "description": "fill with the user id who can you want to set as sudo user (separate with space).",
             "required": true,
             "value": "2056407064"
         },
         "DURATION_LIMIT": {
             "description": "filled, don't change this !",
             "required": true,
-            "value": ""
+            "value": "180"
         },
         "BOT_TOKEN": {
             "description": "fill with your bot token get from @BotFather on telegram",
