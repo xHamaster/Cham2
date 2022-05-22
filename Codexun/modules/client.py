@@ -82,7 +82,7 @@ def others_markup(videoid, user_id):
             InlineKeyboardButton(text="‣‣I", callback_data=f"skipvc"),
             InlineKeyboardButton(text="▢", callback_data=f"stopvc"),
         ],[
-            InlineKeyboardButton(text="Fuck", callback_data=f"cls"),
+            InlineKeyboardButton(text="Manage", callback_data=f"cls"),
         ],
         
     ]
@@ -270,7 +270,7 @@ menu_keyboard = InlineKeyboardMarkup(
              InlineKeyboardButton(text="Quality", callback_data=f"high"),
         ],[
             InlineKeyboardButton(text="CleanDB", callback_data=f"dbconfirm"),
-             InlineKeyboardButton(text="About", callback_data=f"grpabout"),
+             InlineKeyboardButton(text="About", callback_data=f"nonabout"),
         ],[
              InlineKeyboardButton(text="🗑️ Close Menu", callback_data=f"cls"),
         ],
@@ -849,6 +849,20 @@ async def first(_, CallbackQuery):
     )
     else:
         await CallbackQuery.answer(f"Nothing is playing on voice chat.", show_alert=True)
+
+@Client.on_callback_query(filters.regex("nonabout"))
+async def nonabout(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""**Here is the some basic information about to {BOT_NAME},From here you can simply contact us and can join us!**""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+              [
+                    InlineKeyboardButton("Support 🚶", url=f"https://t.me/{SUPPORT}"),
+                    InlineKeyboardButton("Updates 🤖", url=f"https://t.me/{UPDATE}")
+                ],
+              [InlineKeyboardButton("🔙  Back Menu", callback_data="cbmenu")]]
+        ),
+    )
 
 
 @Client.on_callback_query(filters.regex("dbconfirm"))
