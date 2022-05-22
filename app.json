@@ -65,10 +65,10 @@
             "required": true,
             "value": ""
         },
-        "BG_IMG": {
-            "description": "DON'T CHANGE IT !!",
+        "START_IMG": {
+            "description": "Set your own music bot image which comes after /start",
             "required": true,
-            "value": "https://telegra.ph/file/f2a2d31f60a9e0f3dbe94.png"
+            "value": ""
         },
         "API_ID": {
             "description": "your Api ID from my.telegram.org/apps",
