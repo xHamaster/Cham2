@@ -39,11 +39,3 @@ Use the given buttons for more 📍""",
            ]
         ),
     )
-@Client.on_message(command("alive") & ~filters.edited)
-async def start_(client: Client, message: Message):
-    await message.reply_photo(
-        photo=f"https://telegra.ph/file/9d1ee651cb815e49fb6ad.jpg",
-        caption=f"""**Welcome {message.from_user.mention()}** 👋
-
-Am I [{BOT_NAME}](https://t.me/{BOT_USERNAME})**""",
-    )
