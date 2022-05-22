@@ -215,7 +215,7 @@ async def play(_, message: Message):
       
 
         return
-    lel = await message.reply("**Connecting server...🔄**")
+    lel = await message.reply("**🔄 | Processing...**")
 
     chid = message.chat.id
 
@@ -311,7 +311,7 @@ async def play(_, message: Message):
         
        [
             InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="cbgroupab"),
+            InlineKeyboardButton("About 👨🏻‍💻", callback_data="nonabout"),
         ],[
             InlineKeyboardButton("Close 🗑️", callback_data="cls"),
         ],
@@ -352,7 +352,7 @@ async def play(_, message: Message):
         
        [
             InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="cbgroupab"),
+            InlineKeyboardButton("About 👨🏻‍💻", callback_data="nonabout"),
         ],[
             InlineKeyboardButton("Close 🗑️", callback_data="cls"),
         ],
@@ -448,10 +448,10 @@ async def play(_, message: Message):
             return await lel.edit(
                 "**Don't be a crazy, Give me song name to play!\n\nExampl \n/play hamanwa mere**"
             )
-        await lel.edit("**Connected successfully...✅**")
+        await lel.edit("**🔍 | Finding...**")
         query = message.text.split(None, 1)[1]
         # print(query)
-        await lel.edit("**Downloding your song...📥**")
+        await lel.edit("**⏳ | Downloading...**")
         try:
             results = YoutubeSearch(query, max_results=5).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -484,7 +484,7 @@ async def play(_, message: Message):
         
        [
             InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="cbgroupab"),
+            InlineKeyboardButton("About 👨🏻‍💻", callback_data="nonabout"),
         ],[
             InlineKeyboardButton("Close 🗑️", callback_data="cls"),
         ],
