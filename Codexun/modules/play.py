@@ -64,6 +64,7 @@ from Codexun.config import (
     SUPPORT,
     UPDATE,
     BOT_NAME,
+    START_IMG,
     BOT_USERNAME,
 )
 from Codexun.utils.filters import command
